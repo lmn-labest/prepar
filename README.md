@@ -72,7 +72,7 @@ prepar pre.dar
 # Exemplo
 
 
-Descompactando o exemplo que esta pasta `contrib/bin/` para `bin/`.
+Descompactando o exemplo que esta na pasta `contrib/bin/` para `bin/`.
 
 ```console
 tar -xvzf contrib/examples/solo.tar.gz -C bin/
