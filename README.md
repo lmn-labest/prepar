@@ -21,8 +21,6 @@ cp -v metis-5.1.0/build/lib/lib/libmetis.a ../lib
 cd ../../
 ```
 
-A lib vai estar na local `build/Linux-x86_64/libmetis/libmetis.a`. É necessário colocar a lib na pasta `lib` do projeto do pre
-
 ```console
 lib
 └── libmetis.a
@@ -33,7 +31,7 @@ As versões novas do metis precisam dessa lib extra `libGKlib`. As versões mais
 
 # Compilar o pre
 
-Fazer uma copia do `Makefile` base
+Fazer uma copia do `Makefile_base`
 
 ```console
 cp contrib/Makefile_base Makefile
