@@ -2,3 +2,4 @@
 *.mod
 metisLib/metis-5.1.0/
 bin/
+lib/

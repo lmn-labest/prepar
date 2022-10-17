@@ -6,6 +6,8 @@ Index
 - [Compilar o pre](#compilar-o-pre)
 - [Rodando o pre](#rodando-o-pre)
 - [Exemplo](#exemplo)
+- [Estrutura do projeto](#estrutura-do-projeto)
+
 
 # Compilar o metis
 
@@ -17,7 +19,8 @@ tar -xvzf metis-5.1.0.tar.gz
 cd metis-5.1.0
 make config
 make
-cp -v metis-5.1.0/build/lib/lib/libmetis.a ../lib
+mkdir -p ./../../lib/
+cp -v build/Linux-x86_64/libmetis/libmetis.a ../../lib/
 cd ../../
 ```
 
@@ -80,4 +83,62 @@ Gerando o particionamento executando o `prepar` na pasta `bin/solo/`
 
 ```console
 prepar pre.dat
+```
+
+Exemplo da malha particonada em 6 partições
+
+![](doc/part_mesh.png)
+
+# Estrutura do projeto
+
+A estrutura final do projeto:
+
+```
+.
+├── bin
+│   └── prepar
+├── contrib
+│   ├── examples
+│   │   └── solo.tar.gz
+│   └── Makefile_base
+├── doc
+│   └── part_mesh.png
+├── include
+│   ├── elementos.fi
+│   ├── gauss.fi
+│   ├── load.fi
+│   ├── parallel.fi
+│   ├── readfile.fi
+│   ├── string.fi
+│   ├── termprop.fi
+│   ├── time.fi
+│   └── transiente.fi
+├── lib
+│   └── libmetis.a
+├── LICENSE
+├── Makefile
+├── metisLib
+│   └── metis-5.1.0.tar.gz
+├── README.md
+└── src
+    ├── Adjacency.f
+    ├── Filenames.f
+    ├── Main.f
+    ├── Malloc.f
+    ├── malloc.mod
+    ├── Mpi_comunicate.f
+    ├── Parallel_imp.f
+    ├── Partdmesh.f
+    ├── Pdmetis.f
+    ├── Propnode.f
+    ├── Rdata.f
+    ├── Read_mef.f
+    ├── Read_metis.f
+    ├── Time.f
+    ├── Vtk.f
+    ├── Write_mef.f
+    ├── Write_par.f
+    └── Write_vtk.f
+
+8 directories, 36 files
 ```

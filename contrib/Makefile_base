@@ -67,8 +67,8 @@ endif
 # gnu gcc
 ifeq ($(CO),gfortran)
   # OFLAGS  += -fc=gfortran -J$(PATH_MOD) -cpp
-  # OFLAGS  += -J$(PATH_MOD) -fallow-argument-mismatch -cpp# Fedora gfortran 12.1.1
-  OFLAGS  += -J$(PATH_MOD) -cpp
+  OFLAGS  += -J$(PATH_MOD) -fallow-argument-mismatch -cpp # Fedora gfortran 12.1.1
+  #OFLAGS  += -J$(PATH_MOD) -cpp
   LDFLAGS +=
   ifeq ($(MPI),yes)
     LDFLAGS += -lmpich
