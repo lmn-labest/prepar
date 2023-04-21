@@ -1,11 +1,15 @@
 # prepar
 
+![](https://img.shields.io/github/last-commit/lmn-labest/prepar?style=plasti&ccolor=blue)
+![](https://img.shields.io/badge/Autor-Henrique%20C%20C%20de%20Andrade-blue)
+[![Prepar build](https://github.com/lmn-labest/prepar/actions/workflows/build.yml/badge.svg)](https://github.com/lmn-labest/prepar/actions/workflows/build.yml)
+
 Index
-- [prepar](#prepar)
 - [Compilar o metis](#compilar-o-metis)
 - [Compilar o pre](#compilar-o-pre)
 - [Rodando o pre](#rodando-o-pre)
 - [Exemplo](#exemplo)
+- [Pre Compilados](#pre-compilados
 
 
 # Compilar o metis
@@ -122,3 +126,9 @@ prepar pre.dat
 Exemplo da malha particonada em 6 partições
 
 ![](doc/part_mesh.png)
+
+
+# Pre-compilados
+
+Versões pré compilados para `linux` pode ser encotradas aqui [binarios](https://github.com/lmn-labest/prepar/releases/tag/0.1.0)
+
