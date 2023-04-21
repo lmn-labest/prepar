@@ -66,7 +66,7 @@ ifeq ($(CO),ifort)
 endif
 # gnu gcc
 ifeq ($(CO),gfortran)
-  OFLAGS  += -J$(PATH_MOD) -fallow-argument-mismatch
+  OFLAGS  += -J$(PATH_MOD) -fallow-argument-mismatch -cpp
   LDFLAGS += -static
   ifeq ($(MPI),yes)
     LDFLAGS += -lmpich

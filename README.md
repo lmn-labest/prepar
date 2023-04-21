@@ -23,11 +23,10 @@ cp -v build/Linux-x86_64/libmetis/libmetis.a ../../lib/
 cd ../../
 ```
 
-Este comando irão descompactar e compilar o metis5, configurarr o make, excetar a compilação e copiar automaticamente a `libmetis.a` para a pasta `lib`.
+Estes comandos irão descompactar e compilar o metis5, configurarr o make, excetar a compilação e copiar automaticamente a `libmetis.a` para a pasta `lib`.
 
 
-
-As versões novas do metis precisam dessa lib extra `libGKlib`. As versões mais antigas do metis podem ser encontrados [aqui](http://glaros.dtc.umn.edu/gkhome/metis/metis/download).
+> OBS: As versões novas do metis que estão  disponiveis no `github` precisam dessa lib extra `libGKlib`. As versões mais antigas do `metis` podem ser encontrados [aqui](http://glaros.dtc.umn.edu/gkhome/metis/metis/download). As `prepar` só funciona com as versão antigas do `metis`.
 
 
 # Compilar o pre
@@ -38,7 +37,7 @@ O primeiro passo é fazer uma copia do `Makefile_base`
 cp contrib/Makefile_base Makefile
 ```
 
-Para compilar o `prepar` a estrutura do projeto tem que ser algo similar à:
+Antes de compilar o `prepar` a estrutura do projeto tem que ser algo similar à:
 
 ```console
 ├── include
