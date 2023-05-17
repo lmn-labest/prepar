@@ -9,7 +9,7 @@ Index
 - [Compilar o pre](#compilar-o-pre)
 - [Rodando o pre](#rodando-o-pre)
 - [Exemplo](#exemplo)
-- [Pre Compilados](#pre-compilados
+- [Pre Compilados](#pre-compilados)
 
 
 # Compilar o metis
