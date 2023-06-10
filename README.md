@@ -108,7 +108,7 @@ end
 Para rodar basta
 
 ```console
-prepar pre.dat
+prepar solo/pre.dat
 ```
 
 ## Exemplo
@@ -116,6 +116,7 @@ prepar pre.dat
 Exsite um exemplo de aquivo de entrada na pastas  `contrib/bin/`. Para usa-lo primeiro vamos descompacta-lo para a pasta `bin/`.
 
 ```console
+mkdir -p bin
 tar -xvzf contrib/examples/solo.tar.gz -C bin/
 ```
 
