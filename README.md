@@ -5,14 +5,16 @@
 [![Prepar build](https://github.com/lmn-labest/prepar/actions/workflows/build.yml/badge.svg)](https://github.com/lmn-labest/prepar/actions/workflows/build.yml)
 
 Index
-- [Compilar o metis](#compilar-o-metis)
-- [Compilar o pre](#compilar-o-pre)
-- [Rodando o pre](#rodando-o-pre)
-- [Exemplo](#exemplo)
-- [Pre Compilados](#pre-compilados)
+- [prepar](#prepar)
+  - [Compilar o metis](#compilar-o-metis)
+  - [Compilar o pre](#compilar-o-pre)
+  - [Rodando o pre](#rodando-o-pre)
+  - [Exemplo](#exemplo)
+  - [Pre-compilados](#pre-compilados)
+  - [Docker](#docker)
 
 
-# Compilar o metis
+## Compilar o metis
 
 Para compilar o metis basta seguir os seguintes passos:
 
@@ -33,7 +35,7 @@ Estes comandos irão descompactar e compilar o metis5, configurarr o make, excet
 > OBS: As versões novas do metis que estão  disponiveis no `github` precisam dessa lib extra `libGKlib`. As versões mais antigas do `metis` podem ser encontrados [aqui](http://glaros.dtc.umn.edu/gkhome/metis/metis/download). As `prepar` só funciona com as versão antigas do `metis`.
 
 
-# Compilar o pre
+## Compilar o pre
 
 O primeiro passo é fazer uma copia do `Makefile_base`
 
@@ -85,7 +87,7 @@ make
 
 O executavel do `prepar` estará na pasta `bin`.
 
-# Rodando o pre
+## Rodando o pre
 
 Criar um arquivo `pre.dat` com o conteudo
 
@@ -109,7 +111,7 @@ Para rodar basta
 prepar pre.dat
 ```
 
-# Exemplo
+## Exemplo
 
 Exsite um exemplo de aquivo de entrada na pastas  `contrib/bin/`. Para usa-lo primeiro vamos descompacta-lo para a pasta `bin/`.
 
@@ -128,7 +130,20 @@ Exemplo da malha particonada em 6 partições
 ![](doc/part_mesh.png)
 
 
-# Pre-compilados
+## Pre-compilados
 
 Versões pré compilados para `linux` pode ser encotradas aqui [binarios](https://github.com/lmn-labest/prepar/releases/tag/0.1.0)
 
+## Docker
+
+Gerando a imagem caso ainda não exita
+
+```console
+docker build -t prepar:latest .
+```
+
+Para executar o `prepar` e gerar o parcionamento gerar o parcionamento
+
+```console
+docker run --rm -it -v "$(pwd)/bin/solo/:/usr/build/solo/" prepar solo/pre.dat
+```
