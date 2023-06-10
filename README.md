@@ -85,7 +85,7 @@ Agora para compilar fazer basta:
 make
 ```
 
-O executavel do `prepar` estará na pasta `bin`.
+O executavel do `prepar` estará na pasta `bin`. Como foi usando a opção `-static` pode ser que seja necessario instalar lib extras no sistema como a `glibc-static`. Outra opção é tirar a opção `-static` do `Makefile`.
 
 ## Rodando o pre
 
@@ -105,12 +105,6 @@ memory     1000
 end
 ```
 
-Para rodar basta
-
-```console
-prepar solo/pre.dat
-```
-
 ## Exemplo
 
 Exsite um exemplo de aquivo de entrada na pastas  `contrib/bin/`. Para usa-lo primeiro vamos descompacta-lo para a pasta `bin/`.
@@ -120,10 +114,10 @@ mkdir -p bin
 tar -xvzf contrib/examples/solo.tar.gz -C bin/
 ```
 
-Agora para gerar o particionamento basta executar o `prepar` na pasta `bin/solo/`.
+Agora para gerar o particionamento basta executar o `prepar` na pasta `bin/`.
 
 ```console
-prepar pre.dat
+./prepar solo/pre.dat
 ```
 
 Exemplo da malha particonada em 6 partições
