@@ -6,15 +6,14 @@
 
 Index
 - [prepar](#prepar)
-  - [Compilar o metis](#compilar-o-metis)
-  - [Compilar o pre](#compilar-o-pre)
-  - [Rodando o pre](#rodando-o-pre)
+  - [Compilar o metis no linux](#compilar-o-metis-no-linux)
+  - [Compilar o prepar](#compilar-o-prepar)
+  - [Rodando o prepar](#rodando-o-prepar)
   - [Exemplo](#exemplo)
   - [Pre-compilados](#pre-compilados)
   - [Docker](#docker)
 
-
-## Compilar o metis
+## Compilar o metis no linux
 
 Para compilar o metis basta seguir os seguintes passos:
 
@@ -29,13 +28,14 @@ cp -v build/Linux-x86_64/libmetis/libmetis.a ../../lib/
 cd ../../
 ```
 
-Estes comandos irão descompactar e compilar o metis5, configurarr o make, excetar a compilação e copiar automaticamente a `libmetis.a` para a pasta `lib`.
+Estes comandos irão descompactar e compilar o `metis5`, configurar o `make`, excetar a compilação e copiar automaticamente a `libmetis.a` para a pasta `lib`. A `libmetis.a` será utilizada depois para a compilação do `prepar`
+
+> ⚠️⚠️ OBS: Você precisa ter instalado o `cmake` por causa do metis.
+
+> ⚠️⚠️ OBS: As versões novas do metis que estão  disponiveis no `github` precisam dessa lib extra `libGKlib`. As versões mais antigas do `metis` podem ser encontrados [aqui](http://glaros.dtc.umn.edu/gkhome/metis/metis/download). As `prepar` só funciona com as versão antigas do `metis`.
 
 
-> OBS: As versões novas do metis que estão  disponiveis no `github` precisam dessa lib extra `libGKlib`. As versões mais antigas do `metis` podem ser encontrados [aqui](http://glaros.dtc.umn.edu/gkhome/metis/metis/download). As `prepar` só funciona com as versão antigas do `metis`.
-
-
-## Compilar o pre
+## Compilar o prepar
 
 O primeiro passo é fazer uma copia do `Makefile_base`
 
@@ -85,9 +85,9 @@ Agora para compilar fazer basta:
 make
 ```
 
-O executavel do `prepar` estará na pasta `bin`. Como foi usando a opção `-static` pode ser que seja necessario instalar lib extras no sistema como a `glibc-static`. Outra opção é tirar a opção `-static` do `Makefile`.
+O executável do `prepar` estará na pasta `bin`. Como foi usando a opção `-static` pode ser que seja necessario instalar lib extras no sistema como a `glibc-static`. Outra opção é tirar a opção `-static` do `Makefile`.
 
-## Rodando o pre
+## Rodando o prepar
 
 Criar um arquivo `pre.dat` com o conteudo
 
@@ -120,9 +120,53 @@ Agora para gerar o particionamento basta executar o `prepar` na pasta `bin/`.
 ./prepar solo/pre.dat
 ```
 
+Após rodar o `prepar` a pasta dever ser 
+
+```console
+solo/
+├── config
+│   ├── grav.dat
+│   ├── poromec.config
+│   ├── poromec.solver
+│   └── setprint.dat
+├── mesh
+│   ├── solo1_boun.dat
+│   ├── solo1_coor.dat
+│   ├── solo1_elmt.dat
+│   ├── solo1_elmtloads.dat
+│   └── solo1_initial.dat
+├── output
+├── part
+│   ├── solo1_par_0.dat
+│   ├── solo1_par_1.dat
+│   ├── solo1_par_2.dat
+│   ├── solo1_par_3.dat
+│   ├── solo1_par_4.dat
+│   ├── solo1_par_5.dat
+│   ├── solo1_par_n_0_my_part.vtk
+│   ├── solo1_par_n_1_my_part.vtk
+│   ├── solo1_par_n_2_my_part.vtk
+│   ├── solo1_par_n_3_my_part.vtk
+│   ├── solo1_par_n_4_my_part.vtk
+│   ├── solo1_par_n_5_my_part.vtk
+│   ├── solo1_par_n_6_part.vtk
+│   └── solo1_par_pre_t_6.txt
+├── pre.dat
+├── run
+│   ├── nloads.dat
+│   ├── node.dat
+│   └── run.dat
+└── solo1.dat
+```
+
+As pastas `run`, `mesh`, `config` e o arquivo `solo1.dat` são os arquivos de entrada do simulação do `mefpar` em sequencial. Na pasta `solo/part` ficam salvos os arquivos do particionamento `*.dat` e `*.vtk`. Os arquivos `solo1_par_*.dat` são arquivos de entrada para a simulação em paralelo do `mefpar`.
+
 Exemplo da malha particonada em 6 partições
 
 ![](doc/part_mesh.png)
+
+> ⚠️⚠️ OBS: 
+> ⚠️⚠️ OBS: A estrura de pastas dos arquivos de `input` e o`output` podem ser mudadas. Essa estrutura é apenas a que eu gosto, mas você pode ficar a vontade de experimentar outras.
 
 
 ## Pre-compilados
@@ -131,13 +175,15 @@ Versões pré compilados para `linux` pode ser encotradas aqui [binarios](https:
 
 ## Docker
 
-Gerando a imagem caso ainda não exita
+Caso você queria rodar utilizando containers temos um `Dockerfile` configurado.
+
+Gerando a imagem. Este procedimento precisa ser feito apenas uma única vez.
 
 ```console
 docker build -t prepar:latest .
 ```
 
-Para executar o `prepar` e gerar o parcionamento gerar o parcionamento
+Para executar o `prepar` e gerar o parcionamento. 
 
 ```console
 docker run --rm -it -v "$(pwd)/bin/solo/:/usr/build/solo/" prepar solo/pre.dat
