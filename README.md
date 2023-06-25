@@ -159,7 +159,7 @@ solo/
 └── solo1.dat
 ```
 
-As pastas `run`, `mesh`, `config` e o arquivo `solo1.dat` são os arquivos de entrada do simulação do `mefpar` em sequencial. Na pasta `solo/part` ficam salvos os arquivos do particionamento `*.dat` e `*.vtk`. Os arquivos `solo1_par_*.dat` são arquivos de entrada para a simulação em paralelo do `mefpar`.
+As pastas `run`, `mesh`, `config` e o arquivo `solo1.dat` são os arquivos de entrada da simulação do `mefpar` em sequencial. Na pasta `solo/part` ficam salvos os arquivos do particionamento `*.dat` e `*.vtk`. Os arquivos `solo1_par_*.dat` são arquivos de entrada para a simulação em paralelo do `mefpar`.
 
 Exemplo da malha particonada em 6 partições
 
@@ -177,13 +177,13 @@ Versões pré compilados para `linux` pode ser encotradas aqui [binarios](https:
 
 Caso você queria rodar utilizando containers temos um `Dockerfile` configurado.
 
-Gerando a imagem. Este procedimento precisa ser feito apenas uma única vez.
+Para gerar a imagem, este procedimento precisa ser feito apenas uma única vez:
 
 ```console
 docker build -t prepar:latest .
 ```
 
-Para executar o `prepar` e gerar o parcionamento. 
+Para executar o `prepar` e gerar o parcionamento:
 
 ```console
 docker run --rm -it -v "$(pwd)/bin/solo/:/usr/build/solo/" prepar solo/pre.dat
