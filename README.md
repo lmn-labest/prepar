@@ -6,14 +6,15 @@
 
 Index
 - [prepar](#prepar)
-  - [Compilar o metis no linux](#compilar-o-metis-no-linux)
-  - [Compilar o prepar](#compilar-o-prepar)
-  - [Rodando o prepar](#rodando-o-prepar)
-  - [Exemplo](#exemplo)
-  - [Pre-compilados](#pre-compilados)
-  - [Docker](#docker)
+  - [1) Compilar o metis no linux](#1-compilar-o-metis-no-linux)
+  - [2) Compilar o prepar](#2-compilar-o-prepar)
+  - [3) Rodando o prepar](#3-rodando-o-prepar)
+  - [4) Exemplo](#4-exemplo)
+  - [5) Pre-compilados](#5-pre-compilados)
+  - [6) Docker](#6-docker)
+  - [7) Usando no WSL](#7-usando-no-wsl)
 
-## Compilar o metis no linux
+## 1) Compilar o metis no linux
 
 Para compilar o metis basta seguir os seguintes passos:
 
@@ -35,7 +36,7 @@ Estes comandos irão descompactar e compilar o `metis5`, configurar o `make`, ex
 > ⚠️⚠️ OBS: As versões novas do metis que estão  disponiveis no `github` precisam dessa lib extra `libGKlib`. As versões mais antigas do `metis` podem ser encontrados [aqui](http://glaros.dtc.umn.edu/gkhome/metis/metis/download). As `prepar` só funciona com as versão antigas do `metis`.
 
 
-## Compilar o prepar
+## 2) Compilar o prepar
 
 O primeiro passo é fazer uma copia do `Makefile_base`
 
@@ -87,7 +88,7 @@ make
 
 O executável do `prepar` estará na pasta `bin`. Como foi usando a opção `-static` pode ser que seja necessario instalar lib extras no sistema como a `glibc-static`. Outra opção é tirar a opção `-static` do `Makefile`.
 
-## Rodando o prepar
+## 3) Rodando o prepar
 
 Criar um arquivo `pre.dat` com o conteudo
 
@@ -105,7 +106,7 @@ memory     1000
 end
 ```
 
-## Exemplo
+## 4) Exemplo
 
 Exsite um exemplo de aquivo de entrada na pastas  `contrib/bin/`. Para usa-lo primeiro vamos descompacta-lo para a pasta `bin/`.
 
@@ -165,15 +166,14 @@ Exemplo da malha particonada em 6 partições
 
 ![](doc/part_mesh.png)
 
-> ⚠️⚠️ OBS: 
-> ⚠️⚠️ OBS: A estrura de pastas dos arquivos de `input` e o`output` podem ser mudadas. Essa estrutura é apenas a que eu gosto, mas você pode ficar a vontade de experimentar outras.
+> ⚠️⚠️ OBS: A estrura de pastas dos arquivos de `input` e `output` podem ser mudadas. Essa estrutura é apenas a que eu gosto, mas você pode ficar a vontade de experimentar outras.
 
 
-## Pre-compilados
+## 5) Pre-compilados
 
 Versões pré compilados para `linux` pode ser encotradas aqui [binarios](https://github.com/lmn-labest/prepar/releases/tag/0.1.0)
 
-## Docker
+## 6) Docker
 
 Caso você queria rodar utilizando containers temos um `Dockerfile` configurado.
 
@@ -188,3 +188,18 @@ Para executar o `prepar` e gerar o parcionamento:
 ```console
 docker run --rm -it -v "$(pwd)/bin/solo/:/usr/build/solo/" prepar solo/pre.dat
 ```
+
+> ⚠️⚠️ OBS: O docker pode ser usado no windows também, mas irá usar bastante recurso da máquina.
+
+## 7) Usando no WSL
+
+Você precisará instalar o `make`, `cmake`, `g++`. Usando o `Ubuntu 22.04.06 LTS` basta utilizar os comandos:
+
+```
+sudo apt update
+sudo apt install make cmake g++ gfortran
+```
+
+Após isso você pode seguir o procedimento normal de instalação no linux.
+
+
