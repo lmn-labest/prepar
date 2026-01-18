@@ -68,7 +68,6 @@ c ===
       include 'string.fi'
 c ... malha
       integer nnodev,nnode,numel,numat,maxnov,maxno,ndf,ndft,ndm,dum,npi
-      integer plastic
       integer*8 i_ix,i_ie,i_e,i_x
 c ... mecanico - poromec
       integer*8 i_f,i_u,i_v,i_a,i_tx0,i_id,i_nload,i_eload,i_eloadp
@@ -77,12 +76,11 @@ c ... termico
 c ...
       character*80 fprop(*)
 c ... arquivo
-      real*8 g(3)
       integer nin
       character*200 lines(*)
-      character*200 plines(*),string2
+      character*200 plines(*)
       integer nlines,ncont,nmc,pnlines
-      character*15 macro(6),string,rc
+      character*15 macro(6),rc
       logical verbose,rload(*)
 c ... auxiliar
       integer j
@@ -99,7 +97,7 @@ c ...
       pnlines = 0
   100 continue
       call readmacro(nin,.true.)
-      write(rc,'(15a)'),(word(j),j=1,15)
+      write(rc,'(15a)')(word(j),j=1,15)
       do 200 j = 1, nmc
         if (rc .eq. macro(j)) go to 300
   200 continue
@@ -166,7 +164,7 @@ c *********************************************************************
       character*80 filein,filearg,fileout
       integer*8 maxmem
       integer nprcs,j,nin
-      integer nargs,ierr
+      integer nargs
       logical ovlp
       logical vtkf,vtkp,mefp,vtkbin,vtkgr
 c ... argumentos por linha de comando
@@ -408,7 +406,7 @@ c *********************************************************************
       integer*8 maxmem
       integer nin
       integer i,j
-      integer nmacro,ierr
+      integer nmacro
       logical ovlp,vtkf,vtkp,mefp,vtkbin,vtkgr
       integer nprcs
       parameter(nmacro = 12)

@@ -1444,6 +1444,30 @@ c ...       valor de uext:
 c .....................................................................
 c
 c ...
+         elseif (load(1,i) .eq. 11) then
+c ...       valor da componente unitaria na direcao x ou y para
+c           calculo da equivalente nodal e interpolacao de valores no tempo
+c ...       (valido apenas para hexaedro)
+c
+c           multiplicador para calculo do equivalente nodal em x ou y ( ou z)
+            call readmacro(nin,.false.)
+            write(string,'(30a)') (word(j),j=1,30)
+            read(string,*,err = 200,end = 200) fload(1,1,i)
+c           numero de parcelas:
+            call readmacro(nin,.false.)
+            write(string,'(30a)') (word(j),j=1,30)
+            read(string,*,err = 200,end = 200) load(2,i)
+            do k = 1, load(2,i)
+               call readmacro(nin,.true.)
+               write(string,'(30a)') (word(j),j=1,30)
+               read(string,*,err = 200,end = 200) fload(k,2,i)
+               call readmacro(nin,.false.)
+               write(string,'(30a)') (word(j),j=1,30)
+               read(string,*,err = 200,end = 200) fload(k,3,i)
+            enddo
+c ........................................................................
+c
+c ...
          elseif (ty .eq. 17) then
 c ...   fonte de geofisica
 c ...       numero de parcelas:

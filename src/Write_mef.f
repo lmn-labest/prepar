@@ -1,7 +1,7 @@
 c **********************************************************************
 c * Data de criacao    : 00/00/0000                                    *
-c * Data de modificaco : 14/05/2017                                    * 
-c * ------------------------------------------------------------------ * 
+c * Data de modificaco : 14/05/2017                                    *
+c * ------------------------------------------------------------------ *
 c * WRITEMYDATPART : escreve o arquivo no formato do mefpar            *
 c * ------------------------------------------------------------------ *
 c * Parametros de entrada :                                            *
@@ -34,7 +34,7 @@ c * ft                -                                                *
 c * ut0               -                                                *
 c * nodedist          - distribuicao das propriedades nodais           *
 c * elmdist           - distribuicao das propriedades por elementos    *
-c * nnodev            - numero de nos dos vertices                     *   
+c * nnodev            - numero de nos dos vertices                     *
 c * nnode             - numero de nos global                           *
 c * numel             - numero de elementos global                     *
 c * maxnov            - numero maximo de nos de vertices por elem nto  *
@@ -57,9 +57,9 @@ c * npes              - numero de processos (MPI)                      *
 c * ------------------------------------------------------------------ *
 c * Parametros de saida :                                              *
 c * ------------------------------------------------------------------ *
-c * ------------------------------------------------------------------ * 
+c * ------------------------------------------------------------------ *
 c * Obs:                                                               *
-c * ------------------------------------------------------------------ * 
+c * ------------------------------------------------------------------ *
 c **********************************************************************
       subroutine  writemydatpart(el      ,x     ,elLG
      1                          ,noLG    ,noGL  ,ranks
@@ -83,18 +83,18 @@ c ===
       implicit none
       include 'load.fi'
       include 'elementos.fi'
-c ... malha      
+c ... malha
       integer el(maxno+1,*)
       real*8 x(*)
       real*8 e(10,*)
       integer ie(*)
       integer maxnov,maxno,ndm,numel,nnodev,nnode,numat,npi,ntn
-c ... problema termico      
+c ... problema termico
       integer ndft
       integer idt(ndft,*),nloadt(*),eloadt(7,*)
       real*8 ft(ndft,*),ut0(ndft,*)
 c ... problema mecanico
-      integer ndf 
+      integer ndf
       real*8 f(ndf,*),u0(ndf,*),tx0(*)
       integer id(*),nload(*),eload(7,*),eloadp(7,*)
 c ... particionamento
@@ -107,7 +107,7 @@ c ... particionamento
       integer rcvs(*),dspl(*)
       logical ovlp
       integer*8 i_lel,i_xl,i_g1,i_g2
-      data i_lel/1/, i_xl/1/, i_g1/1/, i_g2/1/ 
+      data i_lel/1/, i_xl/1/, i_g1/1/, i_g2/1/
 c ... Mpi
       integer my_rank,npes,MPIW,nodedist(*),elmdist(*)
       integer npart,div
@@ -165,7 +165,7 @@ c
 c === macros comandos pre a "mesh"
       do i = 1, nplines
         write(nout,'(a)')trim(plines(i))
-      enddo  
+      enddo
 c =====================================================================
 c
 c === escrevendo no arquivo
@@ -218,7 +218,7 @@ c ...
         ty = geom_el_type(ie(el(maxno+1,lel)))
 c ... tria3
         if( ty .eq. type_tria3) then
-          if(flagTria3) ntria3(2) = tolel    
+          if(flagTria3) ntria3(2) = tolel
           ntria3(1) = ntria3(1) + 1
           tolel     = tolel + 1
           flagTria3 = .false.
@@ -229,7 +229,7 @@ c ... quad4
           if(flagQuad4) nquad4(2) = tolel
           nquad4(1) = nquad4(1) + 1
           tolel     = tolel + 1
-          flagQuad4 = .false.     
+          flagQuad4 = .false.
 c .....................................................................
 c
 c ... tetra4
@@ -237,7 +237,7 @@ c ... tetra4
           if(flagTetra4) ntetra4(2) = tolel
           ntetra4(1) = ntetra4(1) + 1
           tolel     = tolel + 1
-          flagTetra4 = .false.     
+          flagTetra4 = .false.
 c .....................................................................
 c
 c ... hexa8
@@ -245,7 +245,7 @@ c ... hexa8
           if(flagHexa8) nhexa8(2) = tolel
           nhexa8(1) = nhexa8(1) + 1
           tolel     = tolel + 1
-          flagHexa8 = .false.     
+          flagHexa8 = .false.
 c .....................................................................
 c
 c ... prism6
@@ -261,7 +261,7 @@ c ... tetra10
           if(flagtetra10) ntetra10(2) = tolel
           ntetra10(1) = ntetra10(1) + 1
           tolel       = tolel + 1
-          flagtetra10 = .false.      
+          flagtetra10 = .false.
 c .....................................................................
 c
 c ... hexa20
@@ -269,14 +269,14 @@ c ... hexa20
           if(flaghexa20) nhexa20(2) = tolel
           nhexa20(1) = nhexa20(1) + 1
           tolel      = tolel + 1
-          flaghexa20 = .false.      
+          flaghexa20 = .false.
 c .....................................................................
 c
 c ...
         else
           print*,'Non-Existing Element Type:',ty
-          call finalize() 
-        endif 
+          call finalize()
+        endif
 c .....................................................................
       enddo
 c ... elementos em overllaping
@@ -292,7 +292,7 @@ c ... elementos em overllaping
         ty = geom_el_type(ie(el(maxno+1,lel)))
 c ... tria3
         if( ty .eq. type_tria3) then
-          if(flagTria3) ntria3(4) = tolel    
+          if(flagTria3) ntria3(4) = tolel
           ntria3(3) = ntria3(3) + 1
           tolel     = tolel + 1
           flagTria3 = .false.
@@ -303,7 +303,7 @@ c ... quad4
           if(flagQuad4) nquad4(4) = tolel
           nquad4(3) = nquad4(3) + 1
           tolel     = tolel + 1
-          flagQuad4 = .false.     
+          flagQuad4 = .false.
 c .....................................................................
 c
 c ... tetra4
@@ -311,7 +311,7 @@ c ... tetra4
           if(flagTetra4) ntetra4(4) = tolel
           ntetra4(3) = ntetra4(3) + 1
           tolel      = tolel + 1
-          flagTetra4 = .false.     
+          flagTetra4 = .false.
 c .....................................................................
 c
 c ... hexa8
@@ -319,7 +319,7 @@ c ... hexa8
           if(flagHexa8) nhexa8(4) = tolel
           nhexa8(3) = nhexa8(3) + 1
           tolel     = tolel + 1
-          flagHexa8 = .false.     
+          flagHexa8 = .false.
 c .....................................................................
 c
 c ... prism6
@@ -327,7 +327,7 @@ c ... prism6
           if(flagPrism6) nprism6(4) = tolel
           nprism6(3) = nprism6(3) + 1
           tolel      = tolel + 1
-          flagPrism6 = .false.     
+          flagPrism6 = .false.
 c .....................................................................
 c
 c ... tetra10
@@ -335,7 +335,7 @@ c ... tetra10
           if(flagtetra10) ntetra10(4) = tolel
           ntetra10(3) = ntetra10(3) + 1
           tolel       = tolel + 1
-          flagtetra10 = .false.      
+          flagtetra10 = .false.
 c .....................................................................
 c
 c ... hexa20
@@ -343,26 +343,26 @@ c ... hexa20
           if(flaghexa20) nhexa20(4) = tolel
           nhexa20(3) = nhexa20(3) + 1
           tolel      = tolel + 1
-          flaghexa20 = .false.      
+          flaghexa20 = .false.
 c .....................................................................
 c
 c ...
         else
           print*,'Non-Existing Element Type:',ty
-          call finalize() 
-        endif 
+          call finalize()
+        endif
 c .....................................................................
       enddo
-c .....................................................................  
-      nmacros = 0 
+c .....................................................................
+      nmacros = 0
   100 continue
-      nmacros = nmacros + 1 
+      nmacros = nmacros + 1
       write(rc,'(15a)')macros(nmacros)
       do 200 j = 1, nmc
         if(rc .eq. macro(j)) go to 300
   200 continue
       goto 100
-c .....................................................................  
+c .....................................................................
 c
 c .....................................................................
   300 continue
@@ -405,11 +405,12 @@ c ... conectividade tria3
           call global_int(ia(i_g1),el,elmdist,numel,maxno+1,npes,my_rank
      .                   ,MPIW)
           call localel(ia(i_g1),ia(i_lel),elLG,noGL,my_numel,maxno)
-          call writeelmef(ia(i_lel),my_numel,maxno,nout)
+          call writeelmef(ia(i_lel),ie,ntria3(2),tolel
+     .                     ,maxno,3,type_tria3,nout)
           i_g1  = dealloc('g        ')
           i_lel = dealloc('lep      ')
         else
-          if(ntria3(1) .gt. 0 ) then 
+          if(ntria3(1) .gt. 0 ) then
             write(nout,'(a)')"tria3"
             tolel = ntria3(2)+ntria3(1) - 1
             call writeelmef(ia(i_lel),ie,ntria3(2),tolel
@@ -437,8 +438,9 @@ c ... conectividade quad4
           call global_int(ia(i_g1),el,elmdist,numel,maxno+1,npes,my_rank
      .                   ,MPIW)
           call localel(ia(i_g1),ia(i_lel),elLG,noGL,my_numel,maxno)
-          call writeelmef(ia(i_lel),my_numel,maxno,nout)
-          i_g1  = dealloc('g        ')            
+          call writeelmef(ia(i_lel),ie,nquad4(2),tolel
+     .                     ,maxno,4,type_quad4,nout)
+          i_g1  = dealloc('g        ')
           i_lel = dealloc('lep      ')
         else
           if(nquad4(1) .gt. 0) then
@@ -457,7 +459,7 @@ c ... elementos em overlaping
             write(nout,'(a)')"end quad4ov"
 c .....................................................................
           endif
-        endif  
+        endif
       goto 100
 c .....................................................................
 c
@@ -469,8 +471,9 @@ c ... conectividae tetra4
           call global_int(ia(i_g1),el,elmdist,numel,maxno+1,npes,my_rank
      .                   ,MPIW)
           call localel(ia(i_g1),ia(i_lel),elLG,noGL,my_numel,maxno)
-          call writeelmef(ia(i_lel),my_numel,maxno,nout)
-          i_g1   = dealloc('g        ')            
+          call writeelmef(ia(i_lel),ie,ntetra4(2)
+     .                     ,tolel,maxno,4,type_tetra4,nout)
+          i_g1   = dealloc('g        ')
           i_lel = dealloc('lep      ')
         else
           if(ntetra4(1) .gt. 0) then
@@ -523,7 +526,7 @@ c ...
      .                   ,MPIW)
           call localel(ia(i_g1),ia(i_lel),elLG,noGL,my_numel,maxno)
           call writeelmef(ia(i_lel),my_numel,maxno,nout)
-          i_g1   = dealloc('g        ')            
+          i_g1   = dealloc('g        ')
           i_lel = dealloc('lep      ')
 c .....................................................................
 c
@@ -567,7 +570,7 @@ c ... elementos em overlaping
             write(nout,'(a)')"end hexa20ov"
           endif
 c .....................................................................
-        endif  
+        endif
       goto 100
 c .....................................................................
 c
@@ -582,7 +585,7 @@ c ... Propriedades variaveis com a temperatura:termprop
       goto 100
 c .....................................................................
   800 continue
-c ... Curva adiabatica        
+c ... Curva adiabatica
         write(nout,'(a)')'adiabat'
         call writeadiabat(numat,nout)
         write(nout,'(a)')'end adiabat'
@@ -598,14 +601,14 @@ c     processos
           i_xl   = alloc_8('xl       ',ndm,my_nnode)
           i_g1   = alloc_8('Gcoor    ',  ndm,nnode)
           call azero(ia(i_g1),ndm*nnode)
-c ... recupera os valores gobais da coordenadas 
+c ... recupera os valores gobais da coordenadas
           call global_double(ia(i_g1),x,nodedist,nnode,ndm,npes
-     .                             ,my_rank,MPIW)   
+     .                             ,my_rank,MPIW)
           call localcoor(ia(i_g1),ia(i_xl),noLG,my_nnode,ndm)
           call writecoormef(ia(i_xl),my_nnode,ndm,nout)
           i_g1  = dealloc('Gcoor    ')
           i_xl  = dealloc('xl       ')
-c ... escrevendo sequencial                  
+c ... escrevendo sequencial
         else
           i_xl = alloc_8('xl       ',ndm,my_nnode)
           call localcoor(x,ia(i_xl),noLG,my_nnode,ndm)
@@ -622,13 +625,13 @@ c ... Restricoes constraindisp(deslocamentos)
         if( npes .gt. 1)then
           i_g1   = alloc_4('Gid      ',  ndf,nnode)
           call mzero(ia(i_g1),ndf*nnode)
-c ... recupera os valores gobais de id          
+c ... recupera os valores gobais de id
           call global_int(ia(i_g1),id,nodedist,nnode,ndf,npes
-     .                   ,my_rank,MPIW)   
-          call wpbound(ia(i_g1),noLG,my_nnode,ndf,nout)   
+     .                   ,my_rank,MPIW)
+          call wpbound(ia(i_g1),noLG,my_nnode,ndf,nout)
           i_g1  = dealloc('Gid      ')
-        else  
-          call wpbound(id,noLG,my_nnode,ndf,nout)   
+        else
+          call wpbound(id,noLG,my_nnode,ndf,nout)
         endif
         write(nout,'(a)')'end contraindisp'
       goto 100
@@ -640,14 +643,14 @@ c ... Resticoes termicas(temperaturas)
         if( npes .gt. 1)then
           i_g1   = alloc_4('Gidt     ',  ndft,nnode)
           call mzero(ia(i_g1),ndft*nnode)
-c ... recupera os valores gobais de id          
+c ... recupera os valores gobais de id
           call global_int(ia(i_g1),idt,nodedist,nnode,ndft,npes
-     .                   ,my_rank,MPIW)   
-          call wpbound(ia(i_g1),noLG,my_nnode,ndft,nout)   
+     .                   ,my_rank,MPIW)
+          call wpbound(ia(i_g1),noLG,my_nnode,ndft,nout)
           i_g1  = dealloc('Gidt     ')
-        else  
+        else
           call wpbound(idt,noLG,my_nnode,ndft,nout)
-        endif  
+        endif
         write(nout,'(a)')'end constraintemp'
       goto 100
 c .....................................................................
@@ -660,17 +663,17 @@ c ... nodalforces - forcas nodais
           i_g2  = alloc_8('Gf       ',  ndf,nnode)
           call mzero(ia(i_g1),ndf*nnode)
           call azero(ia(i_g2),ndf*nnode)
-c ... recupera os valores gobais de id          
+c ... recupera os valores gobais de id
           call global_int(ia(i_g1),id,nodedist,nnode,ndf,npes
-     .                   ,my_rank,MPIW)   
-c ... recupera os valores gobais de f          
+     .                   ,my_rank,MPIW)
+c ... recupera os valores gobais de f
           call global_double(ia(i_g2),f,nodedist,nnode,ndf,npes
-     .                      ,my_rank,MPIW)   
+     .                      ,my_rank,MPIW)
           call wpforces(ia(i_g2),ia(i_g1),noLG
      .                 ,my_nnode,my_nno1,my_nno2,ndf,nout)
           i_g2  = dealloc('Gf       ')
           i_g1  = dealloc('Gid      ')
-        else  
+        else
           call wpforces(f,id,noLG
      .                 ,my_nnode,my_nno1,my_nno2,ndf,nout)
         endif
@@ -686,17 +689,17 @@ c ... nodalsources - fontes termicas nodais:
           i_g2  = alloc_8('Gft      ',  ndft,nnode)
           call mzero(ia(i_g1),ndft*nnode)
           call azero(ia(i_g2),ndft*nnode)
-c ... recupera os valores gobais de id          
+c ... recupera os valores gobais de id
           call global_int(ia(i_g1),idt,nodedist,nnode,ndft,npes
-     .                   ,my_rank,MPIW)   
-c ... recupera os valores gobais de f          
+     .                   ,my_rank,MPIW)
+c ... recupera os valores gobais de f
           call global_double(ia(i_g2),ft,nodedist,nnode,ndft,npes
-     .                      ,my_rank,MPIW)   
+     .                      ,my_rank,MPIW)
           call wpforces(ia(i_g2),ia(i_g1),noLG
      .                 ,my_nnode,my_nno1,my_nno2,ndft,nout)
           i_g2  = dealloc('Gft      ')
           i_g1  = dealloc('Gidt     ')
-        else  
+        else
           call wpforces(ft,idt,noLG
      .                 ,my_nnode,my_nno1,my_nno2,ndft,nout)
         endif
@@ -712,19 +715,19 @@ c ...nodalloads - nos com cargas cariaveis no tempo:
           i_g2  = alloc_4('Gnload   ',  ndf,nnode)
           call mzero(ia(i_g1),ndf*nnode)
           call mzero(ia(i_g2),ndf*nnode)
-c ... recupera os valores gobais de id          
+c ... recupera os valores gobais de id
           call global_int(ia(i_g1),id,nodedist,nnode,ndf,npes
-     .                   ,my_rank,MPIW)   
-c ... recupera os valores gobais de nload       
+     .                   ,my_rank,MPIW)
+c ... recupera os valores gobais de nload
           call global_int(ia(i_g2),nload,nodedist,nnode,ndf,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           call wploads(ia(i_g2),ia(i_g1),noLG,my_nnode,my_nno1,my_nno2
      .                ,ndf,nout)
           i_g2 = dealloc('Gnload   ')
           i_g1 = dealloc('Gid      ')
-        else  
+        else
           call wploads(nload,id,noLG,my_nnode,my_nno1,my_nno2,ndf,nout)
-        endif  
+        endif
         write(nout,'(a)')'end nodalloads'
       goto 100
 c .....................................................................
@@ -737,17 +740,17 @@ c ...nodalthermloads - nos com cargas termicas variaveis no tempo:
           i_g2  = alloc_4('Gnloadt  ', ndft,nnode)
           call mzero(ia(i_g1),ndft*nnode)
           call mzero(ia(i_g2),ndft*nnode)
-c ... recupera os valores gobais de id          
+c ... recupera os valores gobais de id
           call global_int(ia(i_g1),idt,nodedist,nnode,ndft,npes
-     .                   ,my_rank,MPIW)   
-c ... recupera os valores gobais de nload       
+     .                   ,my_rank,MPIW)
+c ... recupera os valores gobais de nload
           call global_int(ia(i_g2),nloadt,nodedist,nnode,ndft,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           call wploads(ia(i_g2),ia(i_g1),noLG,my_nnode,my_nno1,my_nno2
      .                ,ndft,nout)
           i_g2 = dealloc('Gnloadt  ')
           i_g1 = dealloc('Gidt     ')
-        else  
+        else
           call wploads(nloadt,idt,noLG,my_nnode,my_nno1,my_nno2,ndft
      .                ,nout)
         endif
@@ -761,14 +764,14 @@ c ... elmtloads - cargas nos elementos:
         if( npes .gt. 1)then
           i_g1  = alloc_4('Geload   ',    7,numel)
           call mzero(ia(i_g1),7*numel)
-c ... recupera os valores gobais de eload          
+c ... recupera os valores gobais de eload
           call global_int(ia(i_g1),eload,elmdist,numel,7,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           call wpelloads(ia(i_g1),elLG,my_numel,my_numel_ov,nout)
           i_g1 = dealloc('Geload   ')
-        else  
+        else
           call wpelloads(eload,elLG,my_numel,my_numel_ov,nout)
-        endif  
+        endif
         write(nout,'(a)')'end elmtloads'
       goto 100
 c .....................................................................
@@ -779,14 +782,14 @@ c ... elmtthermloads - cargas termicas nos elementos
         if( npes .gt. 1)then
           i_g1  = alloc_4('Geloadt  ',    7,numel)
           call mzero(ia(i_g1),7*numel)
-c ... recupera os valores gobais de eload          
+c ... recupera os valores gobais de eload
           call global_int(ia(i_g1),eloadt,elmdist,numel,7,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           call wpelloads(ia(i_g1),elLG,my_numel,my_numel_ov,nout)
           i_g1 = dealloc('Geloadt  ')
-        else  
+        else
           call wpelloads(eloadt,elLG,my_numel,my_numel_ov,nout)
-        endif  
+        endif
         write(nout,'(a)')'end elmtthermloads'
       goto 100
 c .....................................................................
@@ -815,17 +818,17 @@ c ... prism6
           call global_int(ia(i_g1),el,elmdist,numel,maxno+1,npes,my_rank
      .                   ,MPIW)
           call localel(ia(i_g1),ia(i_lel),elLG,noGL,my_numel,maxno)
-          call writeelmef(ia(i_lel),my_numel,maxno,nout)
-          i_g1  = dealloc('g        ')            
+          call writeelmef(ia(i_lel),ie, my_numel,maxno,nout)
+          i_g1  = dealloc('g        ')
           i_lel = dealloc('lep      ')
         else
-          if(nprism6(1) .gt. 0 ) then 
+          if(nprism6(1) .gt. 0 ) then
             write(nout,'(a)')"prism6"
             tolel = nprism6(2)+nprism6(1) - 1
             call writeelmef(ia(i_lel),ie,nprism6(2),tolel
      .                     ,maxno,6,type_prism6,nout)
             write(nout,'(a)')"end prism6"
-          endif  
+          endif
 c ... elementos em overlaping
           if(nprism6(3) .gt. 0) then
             write(nout,'(a)')"prism6ov"
@@ -835,17 +838,17 @@ c ... elementos em overlaping
             write(nout,'(a)')"end prism6ov"
 c .....................................................................
           endif
-        endif  
+        endif
       goto 100
 c .....................................................................
 c
-c ... initialdisp - deslocamentos inicias:       
+c ... initialdisp - deslocamentos inicias:
  1450 continue
         print*,"(1450) initialdisp deslocamentos inicias."
       goto 100
 c .....................................................................
 c
-c ... initialtemp - temperaturas inicias:       
+c ... initialtemp - temperaturas inicias:
  1500 continue
         write(nout,'(a)')'initialtemp'
 c ... escrevendo tempratura inciais  (temperatura espalhada pelos
@@ -856,12 +859,12 @@ c     processos)
           call azero(ia(i_g1),ndft*nnode)
 c ... recupera os valores gobais das temperaturas
           call global_double(ia(i_g1),ut0,nodedist,nnode,ndft,npes
-     .                               ,my_rank,MPIW)   
+     .                               ,my_rank,MPIW)
           call localcoor(ia(i_g1),ia(i_xl),noLG,my_nnode,ndft)
           call writecoormef(ia(i_xl),my_nnode,ndft,nout)
           i_g1  = dealloc('Gut0     ')
           i_xl = dealloc('xl       ')
-c ... escrevendo sequencial                  
+c ... escrevendo sequencial
         else
           i_xl = alloc_8('xl      ',ndft,my_nnode)
           call localcoor(ut0,ia(i_xl),noLG,my_nnode,ndft)
@@ -949,19 +952,19 @@ c ... hexa8 arquivo binario auxiliar
       goto 100
 c .....................................................................
 c
-c ... 
+c ...
  2050 continue
          goto 700
       goto 100
 c .....................................................................
 c
-c ... 
+c ...
  2100 continue
         write(nout,'(a,1x,a)')'hydrostatic',name_hidrostatic(1)
       goto 100
 c .....................................................................
 c
-c ... 
+c ...
  2150 continue
         write(nout,'(a,1x,a)')'hydrostress',name_hidrostatic(2)
       goto 100
@@ -973,19 +976,19 @@ c ... Restricoes constrainpmec(deslocamentos-pressao)
         if( npes .gt. 1)then
 c         i_g1   = alloc_4('Gid      ',  ndf,nnode)
 c         call mzero(ia(i_g1),ndf*nnode)
-c ... recupera os valores gobais de id          
+c ... recupera os valores gobais de id
 c         call global_int(ia(i_g1),id,nodedist,nnode,ndf,npes
-c    .                   ,my_rank,MPIW)   
-c         call wpbound(ia(i_g1),noLG,my_nnode,ndf,nout)   
+c    .                   ,my_rank,MPIW)
+c         call wpbound(ia(i_g1),noLG,my_nnode,ndf,nout)
 c         i_g1  = dealloc('Gid      ')
-        else  
-          call wpbound(id,noLG,my_nnode,ndf,nout)   
+        else
+          call wpbound(id,noLG,my_nnode,ndf,nout)
         endif
         write(nout,'(a)')'end constrainpmec'
       goto 100
 c .....................................................................
 c
-c ... 
+c ...
  2250 continue
         write(nout,'(a)')'initialpres'
 c ... escrevendo pressao inciais  (pressao espalhada pelos
@@ -996,12 +999,12 @@ c         i_g1   = alloc_8('Gut0     ',   1,nnode)
 c         call azero(ia(i_g1),1*nnode)
 c ... recupera os valores gobais das temperaturas
 c         call global_double(ia(i_g1),ut0,nodedist,nnode,ndft,npes
-c    .                               ,my_rank,MPIW)   
+c    .                               ,my_rank,MPIW)
 c         call localcoor(ia(i_g1),ia(i_xl),noLG,my_nnode,ndft)
 c         call writecoormef(ia(i_xl),my_nnode,ndft,nout)
 c         i_g1  = dealloc('Gut0     ')
 c         i_xl = dealloc('xl       ')
-c ... escrevendo sequencial                  
+c ... escrevendo sequencial
         else
           malloc_name = 'xl'
           i_xl = alloc_8(malloc_name,1,my_nnode)
@@ -1015,7 +1018,7 @@ c ... escrevendo sequencial
       goto 100
 c .....................................................................
 c
-c ... 
+c ...
  2300 continue
         write(nout,'(a)')'initialstress'
 c ... escrevendo pressao inciais  (pressao espalhada pelos
@@ -1026,12 +1029,12 @@ c         i_g1   = alloc_8('Gut0     ',   1,nnode)
 c         call azero(ia(i_g1),1*nnode)
 c ... recupera os valores gobais das temperaturas
 c         call global_double(ia(i_g1),ut0,nodedist,nnode,ndft,npes
-c    .                               ,my_rank,MPIW)   
+c    .                               ,my_rank,MPIW)
 c         call localcoor(ia(i_g1),ia(i_xl),noLG,my_nnode,ndft)
 c         call writecoormef(ia(i_xl),my_nnode,ndft,nout)
 c         i_g1  = dealloc('Gut0     ')
 c         i_xl = dealloc('xl       ')
-c ... escrevendo sequencial                  
+c ... escrevendo sequencial
         else
           malloc_name = 'xl'
           i_xl = alloc_8(malloc_name,ntn,my_nnode)
@@ -1046,28 +1049,28 @@ c ... escrevendo sequencial
       goto 100
 c .....................................................................
 c
-c ... 
+c ...
  2350 continue
 c ... elmtpresloads - cargas nos elementos:
         write(nout,'(a)')'elmtpresloads'
         if( npes .gt. 1)then
           i_g1  = alloc_4('Geload   ',    7,numel)
           call mzero(ia(i_g1),7*numel)
-c ... recupera os valores gobais de eload          
+c ... recupera os valores gobais de eload
           call global_int(ia(i_g1),eload,elmdist,numel,7,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           call wpelloads(ia(i_g1),elLG,my_numel,my_numel_ov,nout)
           i_g1 = dealloc('Geload   ')
-        else  
+        else
           call wpelloads(eloadp,elLG,my_numel,my_numel_ov,nout)
-        endif  
+        endif
         write(nout,'(a)')'end elmtpresloads'
       goto 100
 c .....................................................................
       goto 100
 c .....................................................................
 c
-c ... 
+c ...
  2400 continue
         call writefmate(file_prop,numat,nout)
       goto 100
@@ -1083,7 +1086,7 @@ c
 c === macros comandos apos a "end mesh"
       do i = 1, nlines
         write(nout,'(a)')trim(lines(i))
-      enddo  
+      enddo
 c =====================================================================
 c
 c ===
@@ -1094,7 +1097,7 @@ c ===
 c ... caso especial de processos ociosos
       nmacros = 0
   105 continue
-      nmacros = nmacros + 1 
+      nmacros = nmacros + 1
       write(rc,'(15a)')macros(nmacros)
       do 205 j = 1, nmc
         if(rc .eq. macro(j)) go to 305
@@ -1147,7 +1150,7 @@ c ... conectividades no mpi (conectividade espalhada pelos processos)
         call global_int(ia(i_g1),el,elmdist,numel,maxno+1,npes,my_rank
      .                 ,MPIW)
         i_g1  = dealloc('Gel     ')
-      goto 105    
+      goto 105
 c .....................................................................
 c
 c ... Coordenadas
@@ -1157,9 +1160,9 @@ c ... coordenandas no mpi (coordenadas espalhada pelos processos)
           i_g1   = alloc_8('Gcoorf  ',  ndm,nnode)
 c         call azero(ia(i_g1),ndm*nnode)
           call global_double(ia(i_g1),x,nodedist,nnode,ndm,npes,my_rank
-     .                      ,MPIW)   
+     .                      ,MPIW)
           i_g1  = dealloc('Gcoorf  ')
-      goto 105    
+      goto 105
 c .....................................................................
 c
 c ... Restricoes constraindisp(deslocamentos)
@@ -1167,9 +1170,9 @@ c ... Restricoes constraindisp(deslocamentos)
 c ... restricoes no mpi (restricoes espalhada pelos processos)
           i_g1   = alloc_4('Gidf    ',  ndf,nnode)
           call global_int(ia(i_g1),id,nodedist,nnode,ndf,npes,my_rank
-     .                    ,MPIW)   
+     .                    ,MPIW)
           i_g1  = dealloc('Gidf    ')
-      goto 105    
+      goto 105
 c .....................................................................
 c
 c ... Resticoes termicas(temperaturas)
@@ -1177,9 +1180,9 @@ c ... Resticoes termicas(temperaturas)
 c ... restricoes no mpi (restricoes espalhada pelos processos)
           i_g1   = alloc_4('Gidtf   ',  ndft,nnode)
           call global_int(ia(i_g1),idt,nodedist,nnode,ndft,npes,my_rank
-     .                    ,MPIW)   
+     .                    ,MPIW)
           i_g1  = dealloc('Gidtf   ')
-      goto 105    
+      goto 105
 c .....................................................................
 c
 c ... nodalforces - forcas nodais
@@ -1188,12 +1191,12 @@ c ... nodalforces no mpi (nodalforces espalhada pelos processos)
           i_g1  = alloc_4('Gidf    ',  ndf,nnode)
           i_g2  = alloc_8('Gff     ',  ndf,nnode)
           call global_int(ia(i_g1),id,nodedist,nnode,ndf,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           call global_double(ia(i_g2),f,nodedist,nnode,ndf,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           i_g2  = dealloc('Gidf    ')
           i_g1  = dealloc('Gff     ')
-      goto 105    
+      goto 105
 c .....................................................................
 c
 c ... nodalsources - fontes termicas
@@ -1202,12 +1205,12 @@ c ... nodalsources no mpi (nodalsources espalhada pelos processos)
           i_g1  = alloc_4('Gidtf   ',  ndft,nnode)
           i_g2  = alloc_8('Gftf    ',  ndft,nnode)
           call global_int(ia(i_g1),idt,nodedist,nnode,ndft,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           call global_double(ia(i_g2),ft,nodedist,nnode,ndft,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           i_g2  = dealloc('Gidtf   ')
           i_g1  = dealloc('Gftf    ')
-      goto 105    
+      goto 105
 c .....................................................................
 c
 c ...nodalloads - nos com cargas variaveis no tempo:
@@ -1216,12 +1219,12 @@ c ... nodalloads no mpi (nodalloads espalhada pelos processos)
           i_g1  = alloc_4('Gidf    ',  ndf,nnode)
           i_g2  = alloc_4('Gnloadf ',  ndf,nnode)
           call global_int(ia(i_g1),id,nodedist,nnode,ndf,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           call global_int(ia(i_g2),nload,nodedist,nnode,ndf,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           i_g2  = dealloc('Gidf    ')
           i_g1  = dealloc('Gnloadf ')
-      goto 105    
+      goto 105
 c .....................................................................
 c
 c ...nodalthermloads - nos com cargas variaveis no tempo:
@@ -1230,12 +1233,12 @@ c ... nodalthermloads no mpi (nodalthermloads espalhada pelos processos)
           i_g1  = alloc_4('Gidtf   ', ndft,nnode)
           i_g2  = alloc_4('Gnloadtf', ndft,nnode)
           call global_int(ia(i_g1),idt,nodedist,nnode,ndft,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           call global_int(ia(i_g2),nloadt,nodedist,nnode,ndft,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           i_g2  = dealloc('Gidtf   ')
           i_g1  = dealloc('Gnloadtf')
-      goto 105    
+      goto 105
 c .....................................................................
 c
 c ...eload - elementos com cargas mecanicas:
@@ -1243,9 +1246,9 @@ c ...eload - elementos com cargas mecanicas:
 c ... eload no mpi (eload espalhada pelos processos)
           i_g1  = alloc_4('Geloadf ',    7,numel)
           call global_int(ia(i_g1),eload,elmdist,numel,7,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           i_g1  = dealloc('Geloadf ')
-      goto 105    
+      goto 105
 c .....................................................................
 c
 c ...eloadt- elementos com cargas termicas:
@@ -1253,22 +1256,22 @@ c ...eloadt- elementos com cargas termicas:
 c ... eloadt no mpi (eloadt espalhada pelos processos)
           i_g1  = alloc_4('Geloadtf',    7,numel)
           call global_int(ia(i_g1),eloadt,elmdist,numel,7,npes
-     .                   ,my_rank,MPIW)   
+     .                   ,my_rank,MPIW)
           i_g1  = dealloc('Geloadtf')
-      goto 105    
+      goto 105
 c .....................................................................
 c
-c ... initialtemp - temperaturas inicias:       
+c ... initialtemp - temperaturas inicias:
  1505 continue
 c ... intialtemp   no mpi (inttialtemp espalhada pelos processos)
           i_g1   = alloc_8('Gut0f   ',  ndft,nnode)
           call global_double(ia(i_g1),ut0,nodedist,nnode,ndft,npes
-     .                      ,my_rank,MPIW)   
+     .                      ,my_rank,MPIW)
           i_g1  = dealloc('Gut0f   ')
-      goto 105    
+      goto 105
 c .....................................................................
 c =====================================================================
-c ... end mesh   
+c ... end mesh
  2155 continue
       return
       end
@@ -1291,15 +1294,15 @@ c ... auxiliar
       integer i,j
 c =====================================================================
 c
-c === 
+c ===
       do i = 1, nnode
         if( ndm .eq. 1)then
           write(nout,'(i8,1x,es20.10)')i,(x(j,i),j=1,ndm)
         else if( ndm .eq. 2)then
           write(nout,'(i8,1x,2es20.10)')i,(x(j,i),j=1,ndm)
-        else if(ndm .eq. 3)then 
+        else if(ndm .eq. 3)then
           write(nout,'(i8,1x,3es20.10)')i,(x(j,i),j=1,ndm)
-        endif  
+        endif
       enddo
 c =====================================================================
 c
@@ -1325,9 +1328,9 @@ c ... auxiliar
       integer i,j
 c =====================================================================
 c
-c === 
+c ===
       do i = 1, nnode
-c ... verifica se todas as forcas sao nulas            
+c ... verifica se todas as forcas sao nulas
         add = 0.d0
         do j = 1, ndf
           add = add + dabs(u(j,i))
@@ -1392,11 +1395,11 @@ c ===
       implicit none
       include 'termprop.fi'
 c ... auxiliar
-      integer i,j,k 
+      integer i,j,k
       integer pol
 c ... arquivo
       integer nout
-c ... malha      
+c ... malha
       integer numat
 c =====================================================================
 c
@@ -1404,7 +1407,7 @@ c ===
       do i = 1, numat
         do j = 1 , maxmate
           pol =eprop(j,i)
-c ... verifica se ha propriedade variavel no tempo       
+c ... verifica se ha propriedade variavel no tempo
           if(pol .gt. 0 .and. j .ne. 9) then
             write(nout,'(3i8)')i,j,pol
             do k = 1, pol
@@ -1428,18 +1431,18 @@ c ===
       implicit none
       include 'termprop.fi'
 c ... auxiliar
-      integer i,j,k 
+      integer i,j,k
       integer pol
 c ... arquivo
       integer nout
-c ... malha      
+c ... malha
       integer numat
 c =====================================================================
 c
 c ===
       do i = 1, numat
           pol =eprop(9,i)
-c ... verifica se ha propriedade variavel no tempo       
+c ... verifica se ha propriedade variavel no tempo
           if(pol .gt. 0) then
             write(nout,'(3i8)')i,pol
             do k = 1, pol
@@ -1473,16 +1476,16 @@ c ===
         write(nout,'(2(a5,1x,i9,1x),2(a5,1x,i2,1x))',advance='no')
      .     'nnode',nnode,'numel',numel,'numat',numat,'maxno',maxno
 c ...
-        if(read_parameter(5)) then 
+        if(read_parameter(5)) then
           write(nout,'(a8,1x,i2,1x)',advance='no')'ndf',ndf
         endif
-        if(read_parameter(6)) then 
+        if(read_parameter(6)) then
           write(nout,'(a8,1x,i2,1x)',advance='no')'therm',ndft
         endif
-        if(read_parameter(7)) then 
+        if(read_parameter(7)) then
           write(nout,'(a8,1x,i2,1x)',advance='no')'dim',ndm
         endif
-        if(read_parameter(8)) then 
+        if(read_parameter(8)) then
           write(nout,'(a8,1x,i2,1x)',advance='no')'npi',npi
         endif
         write(nout,*)
@@ -1512,7 +1515,7 @@ c ... auxiliar
       integer i,j
 c =====================================================================
 c
-c === 
+c ===
       write(nout,'(a)')'materials'
       do i = 1, numat
         write(nout,'(2(i2,1x),30(1x,es18.6))')i,ie(i)
@@ -1536,19 +1539,19 @@ c *********************************************************************
 c
 c *********************************************************************
 c * Data de criacao    : 21/03/2017                                    *
-c * Data de modificaco : 00/00/0000                                    * 
+c * Data de modificaco : 00/00/0000                                    *
 c * ------------------------------------------------------------------ *
 c * WRITEFMATE: escreve a macro de fmaterias                           *
 c * ------------------------------------------------------------------ *
-c * Parâmetros de entrada:                                             *
+c * Parï¿½metros de entrada:                                             *
 c * ------------------------------------------------------------------ *
 c * fprop(*)   - nome dos arquivos com as propriedades                 *
 c * numat      - numero de materias                                    *
 c * nout       - arquivo de escrita                                    *
 c * ------------------------------------------------------------------ *
-c * Parâmetros de saida:                                               *
+c * Parï¿½metros de saida:                                               *
 c * ------------------------------------------------------------------ *
-c * ------------------------------------------------------------------ * 
+c * ------------------------------------------------------------------ *
 c * OBS:                                                               *
 c * ------------------------------------------------------------------ *
 c *********************************************************************
@@ -1564,7 +1567,7 @@ c ... auxiliar
       integer i
 c =====================================================================
 c
-c === 
+c ===
       write(nout,'(a)')'fmaterials'
       do i = 1, numat
         write(nout,'(i2,1x,a80)')i,fprop(i)
@@ -1599,7 +1602,7 @@ c ===
 c ... loop nos nos locais
       do noL = 1, my_nnode
         noG  = noLG(noL)
-c ... Existe restricao neste no?        
+c ... Existe restricao neste no?
         k = 0
         do j =1 ,ndf
           k = k + id(j,noG)
@@ -1614,7 +1617,7 @@ c ===
       end
 c =====================================================================
 c *********************************************************************
-c 
+c
 c *********************************************************************
 c * Forcas nodais e valores pescritos.                                *
 c *********************************************************************
@@ -1638,7 +1641,7 @@ c ... loop nos nos locais
       nnoL = nno1 + nno2
       do noL = 1, my_nnode
         noG  = noLG(noL)
-c ... Existe restricao neste no?        
+c ... Existe restricao neste no?
         add = 0.d0
         do j =1 ,ndf
           add = add + dabs(f(j,noG))
@@ -1646,37 +1649,37 @@ c ... Existe restricao neste no?
         enddo
         if( add .ne. 0.d0 )then
           aux(1:ndf) = f(1:ndf,noG)
-c ... o no for V3 ou V4 a contribuicao da forcas 
+c ... o no for V3 ou V4 a contribuicao da forcas
 c     sera zero nesta particao caso seja deslocamento nada se altera
           if(nol .gt. nnoL)then
             do j = 1, ndf
               if(id(j,noG) .eq. 0) aux(j) =0.d0
             enddo
           endif
-c ... verifica se todas as forcas sao nulas            
+c ... verifica se todas as forcas sao nulas
           add = 0.d0
           do j = 1, ndf
             add = add + dabs(aux(j))
           enddo
-c ... so imprime se ao menos houver uma forca nao nula          
-          if( add .ne. 0.d0) then 
+c ... so imprime se ao menos houver uma forca nao nula
+          if( add .ne. 0.d0) then
             write(nout,'(i8,1x,6es18.9)')noL,(aux(j),j=1,ndf)
-          endif  
+          endif
         endif
-      enddo  
+      enddo
 c =====================================================================
 c
 c ===
       return
       end
-c ===================================================================== 
+c =====================================================================
 c *********************************************************************
 c
 c *********************************************************************
 c * WPLOADS : escrita das cargas por no                               *
 c *********************************************************************
       subroutine wploads(nloads,id,noLG,my_nnode,nno1,nno2,ndf,nout)
-c === variaveis      
+c === variaveis
       implicit none
 c ... malha
       integer id(ndf,*),nloads(ndf,*),ndf
@@ -1684,7 +1687,7 @@ c ... particionamento
       integer nno1,nno2,my_nnode
       integer noLG(*)
 c ... arquivo
-      integer nout 
+      integer nout
 c ... auxiliares
       integer nnoL,noL,j,noG
       integer add,aux(6)
@@ -1695,37 +1698,37 @@ c ... loop nos nos locais
       nnoL = nno1 + nno2
       do noL = 1, my_nnode
         noG  = noLG(noL)
-c ... Existe restricao neste no?        
+c ... Existe restricao neste no?
         add = 0
         do j =1 ,ndf
           add = add + nloads(j,noG)
         enddo
         if( add .ne. 0 )then
           aux(1:ndf) = nloads(1:ndf,noG)
-c ... se o no for V3 ou V4 a contribuicao da forcas 
-c     sera zerada nesta particao, caso seja deslocamento, nada se altera   
+c ... se o no for V3 ou V4 a contribuicao da forcas
+c     sera zerada nesta particao, caso seja deslocamento, nada se altera
           if(nol .gt. nnoL)then
             do j = 1, ndf
               if(id(j,noG) .eq. 0) aux(j) = 0
             enddo
           endif
-c ... verifica se todos os loads desse no sao nulos            
+c ... verifica se todos os loads desse no sao nulos
           add = 0
           do j = 1, ndf
             add = add + aux(j)
           enddo
-c ... so imprime se ao menos houver um load nesse no nao nulo          
-          if( add .ne. 0) then 
+c ... so imprime se ao menos houver um load nesse no nao nulo
+          if( add .ne. 0) then
             write(nout,'(i8,1x,9i9)')noL,(aux(j),j=1,ndf)
-          endif  
+          endif
         endif
-      enddo  
+      enddo
 c =====================================================================
 c
 c ===
       return
       end
-c ===================================================================== 
+c =====================================================================
 c **********************************************************************
 c
 c *********************************************************************
@@ -1742,7 +1745,7 @@ c * nout       -> arquivo de saida                                    *
 c * ----------------------------------------------------------------- *
 c *********************************************************************
       subroutine wpelloads(eloads,elLG,my_numel,my_numel_ov,nout)
-c === variaveis      
+c === variaveis
       implicit none
 c ... malha
       integer eloads(7,*)
@@ -1750,7 +1753,7 @@ c ... particionamento
       integer my_numel,my_numel_ov
       integer elLG(*)
 c ... arquivo
-      integer nout 
+      integer nout
 c ... auxiliares
       integer numel_nov,nelL,nelG,j
       integer add,aux(7)
@@ -1762,22 +1765,22 @@ c     numel_nov = my_numel - my_numel_ov
       do nelL = 1, my_numel
         nelG  = elLG(nelL)
         aux(1:7) = eloads(1:7,nelG)
-c ... verifica se ha loads nesse elementos            
+c ... verifica se ha loads nesse elementos
         add = 0
         do j = 1, 7
           add = add + aux(j)
         enddo
-c ... so imprime se ao menos houver um load nesse elemento nao nulo          
-        if( add .ne. 0) then 
+c ... so imprime se ao menos houver um load nesse elemento nao nulo
+        if( add .ne. 0) then
           write(nout,'(i8,1x,7i9)')nelL,(aux(j),j=1,7)
-        endif  
-      enddo  
+        endif
+      enddo
 c =====================================================================
 c
 c ===
       return
       end
-c ===================================================================== 
+c =====================================================================
 c **********************************************************************
 c
 c **********************************************************************
@@ -1797,7 +1800,7 @@ c *    fload(i,j,k) - coeficiente do termo j da carga k                *
 c *                                                                    *
 c **********************************************************************
       subroutine wload(nout)
-c ...  
+c ...
       implicit none
       include 'string.fi'
       include 'load.fi'
@@ -1811,20 +1814,20 @@ c ...
             if (itype .gt. 0) then
                nparc = load(2,i)
                if     (itype .eq. 1) then
-c ...             valor da carga:            
+c ...             valor da carga:
                   write(nout,10) i,itype,fload(1,1,i)
 c .....................................................................
 c
 c ...
                elseif (itype .eq. 2) then
-c ...             u(t) = a.t + b 
+c ...             u(t) = a.t + b
 c ...             valores  b,a:
                   write(nout,10) i,itype,(fload(j,1,i),j=1,2)
 c .....................................................................
 c
 c ...
                elseif (itype .eq. 3) then
-c ...             -kdu/dx = H.(u-uext) 
+c ...             -kdu/dx = H.(u-uext)
 c ...             valores  uext,H:
                   write(nout,10) i,itype,(fload(j,1,i),j=1,2)
 c .....................................................................
@@ -1857,7 +1860,7 @@ c ...
                elseif (itype .eq. 7) then
 c ...       kdu/dx = emiss * const(Stef-Boltz) *(u4-uext4)+H(uext-u)
                   write(nout,14) i,itype,(fload(j,1,i),j=1,3),load(2,i)
-c ...      valores (tempo,temperatura)            
+c ...      valores (tempo,temperatura)
                   do k = 1, nparc
                      write(nout,15) (fload(k,j,i),j=2,3)
                   enddo
@@ -1866,7 +1869,7 @@ c
 c ...
                elseif (itype .eq. 8) then
 c ...       carga constante a partir de um dado t0
-                  write(nout,11) i,itype,load(2,i)
+                  write(nout,11) i,itype,nparc
                   do k = 1, nparc
                      write(nout,15) (fload(k,j,i),j=1,2)
                   enddo
@@ -1875,45 +1878,54 @@ c
 c ...
                elseif (itype .eq. 9) then
 c ...       interpolacao de pontos
-                  write(nout,11) i,itype,load(2,i)
+                  write(nout,11) i,itype,nparc
                   do k = 1, nparc
                      write(nout,15) (fload(k,j,i),j=1,2)
                   enddo
 c .....................................................................
 c
-c ...    troca de calor de Newton(com uExt e h variavel):    
+c ...    troca de calor de Newton(com uExt e h variavel):
                elseif (itype .eq. 10) then
 c ...       interpolacao de pontos
-                  write(nout,11) i,itype,load(2,i)
+                  write(nout,11) i,itype,nparc
                   do k = 1, nparc
                      write(nout,16)
-     .               ,fload(k,1,i),fload(k,2,i),fload(k,3,i)
+     .               fload(k,1,i),fload(k,2,i),fload(k,3,i)
+                  enddo
+c .....................................................................
+c
+c ...
+               elseif (itype .eq. 11) then
+c ...       interpolacao de pontos
+                  write(nout,18) i,itype,fload(1,1,i),nparc
+                  do k = 1, nparc
+                     write(nout,15) fload(k,2,i),fload(k,3,i)
                   enddo
 c .....................................................................
 c
 c ...
                elseif (itype .eq. 17) then
-c ...             carga do problema geofisico                    
+c ...             carga do problema geofisico
                   write(nout,13) i,itype,nparc,(fload(j,1,i),j=1,nparc)
 c .....................................................................
 c
 c ...
                elseif (itype .eq. 18) then
-c ...             variacao senoidal                  
+c ...             variacao senoidal
                   write(nout,13) i,itype,nparc,fload(1,1,i)
      .                          ,fload(2,1,i),fload(3,1,i),fload(1,2,i)
 c .....................................................................
-c                 
-c ... 
+c
+c ...
 c 39 - valor de uma carga ou deslocamento variavel no tempo
 c 40 - forca distribuida constante no contorno
-c 41 - carga normal constante no contorno 
+c 41 - carga normal constante no contorno
 c      (F=carga*normal,normal - calculado nivel elemento)
-c 42 - valor por carga hidrostatica      
+c 42 - valor por carga hidrostatica
 c      (f = alfa*(f0 + density*g*(h-x)) )
 c 43 - fluxo normal de massa
-          elseif (   (itype .eq. 39)    
-     .          .or. (itype .eq. 40) .or. (itype .eq. 41) 
+          elseif (   (itype .eq. 39)
+     .          .or. (itype .eq. 40) .or. (itype .eq. 41)
      .          .or. (itype .eq. 42) .or. (itype .eq. 43) ) then
 c ...       interpolacao de pontos
                   write(nout,11,advance = "no") i,itype
@@ -1933,10 +1945,11 @@ c ...
    15 format (2(es18.9,1x))
    16 format (3(es18.9,1x))
    17 format (99(es18.9,1x))
-      end                        
-c ********************************************************************* 
+   18 format (2(i4,1x),(es18.9,1x),i4)
+      end
+c *********************************************************************
 c
-c ********************************************************************* 
+c *********************************************************************
       subroutine wparallel(elLG,noLG,ranks,sizes,fmap,nnof,rvcs,dspl
      .                    ,id,idt
      .                    ,my_nno1,my_nno2,my_nno3,my_nno4,my_nno1a
@@ -1945,17 +1958,17 @@ c *********************************************************************
 c **********************************************************************
 c * Data de criacao    : 00/00/0000                                    *
 c * Data de modificaco : 09/10/2016                                    *
-c * ------------------------------------------------------------------ * 
+c * ------------------------------------------------------------------ *
 c * WPARALLEL : Escreve informacoes da paralelizacao geradas pelo      *
 c * pre-mpi atraves do macro-comando parallel em wdat                  *
-c * ------------------------------------------------------------------ * 
+c * ------------------------------------------------------------------ *
 c * Parametros de entrada:                                             *
-c * ------------------------------------------------------------------ * 
-c * ------------------------------------------------------------------ * 
+c * ------------------------------------------------------------------ *
+c * ------------------------------------------------------------------ *
 c * Parametros de saida:                                               *
-c * ------------------------------------------------------------------ * 
+c * ------------------------------------------------------------------ *
 c * Obs:                                                               *
-c * ------------------------------------------------------------------ * 
+c * ------------------------------------------------------------------ *
 c **********************************************************************
       implicit none
       include 'elementos.fi'
@@ -1969,13 +1982,13 @@ c **********************************************************************
       integer id(ndf,*),idt(ndft,*)
       integer nout,nnodev,nnode,numel,ndf,ndft
       logical ovlp
-c ... auxiliar      
+c ... auxiliar
       integer i
 c-----------------------------------------------------------------------
        write(nout,'(a)')  'parallel'
-       write(nout,'(a4,1x,i9)') 'novG',nnodev 
-       write(nout,'(a4,1x,i9)') 'noG' ,nnode 
-       write(nout,'(a4,1x,i9)') 'nelG',numel               
+       write(nout,'(a4,1x,i9)') 'novG',nnodev
+       write(nout,'(a4,1x,i9)') 'noG' ,nnode
+       write(nout,'(a4,1x,i9)') 'nelG',numel
 c ......................................................................
 c
 c ..... Metodo de sub-divisao de dominio
@@ -2003,8 +2016,8 @@ c
         write(nout,'(a)') 'noLG'
         call Wrtvet_4(noLG,my_nnode,nout)
 c       do i = 1, my_nnode
-c         write(nout,'(i10)')noLG(i) 
-c       enddo  
+c         write(nout,'(i10)')noLG(i)
+c       enddo
 c ......................................................................
 c
 c ..... Numeros de elemento's pelo tipo
@@ -2022,60 +2035,60 @@ c ......................................................................
 c
 c ..... Mapa Local -> Global de elementos
 c
-        write(nout,'(a4,1x,i9)') 'elLG'        
+        write(nout,'(a4,1x,i9)') 'elLG'
         call Wrtvet_4(elLG,my_numel,nout)
 c        do i = 1, my_numel
-c          write(nout,'(i10)')elLG(i) 
-c        enddo  
+c          write(nout,'(i10)')elLG(i)
+c        enddo
 c ......................................................................
 c
 c ..... Mapa Interface -> Global de no's
        write(nout,'(a4,1x,2i9)') 'fmap',nnof(1),nnof(2)
        call Wrtvet_4(fmap,nnof(1),nout)
        if(ovlp)call Wrtvet_4(fmap(my_nnode+1),nnof(2),nout)
-c      do i = 1, nnof(1) 
+c      do i = 1, nnof(1)
 c        write(nout,'(i10)') fmap(i)
-c      enddo  
+c      enddo
 c ......................................................................
 c
 c ..... Restricoes Globais
 c
 c       if ( ndf .gt. 0) then
 c         write(nout,'(a)') 'idG'
-c         call Wrtmtx_4(id,ndf,nnode,nout)  
+c         call Wrtmtx_4(id,ndf,nnode,nout)
 c         write(nout,'(a)')  'end idG'
-c       endif  
+c       endif
 c       if ( ndft .gt. 0) then
 c         write(nout,'(a)') 'idGt'
-c         call Wrtmtx_4(idt,ndft,nnode,nout)  
+c         call Wrtmtx_4(idt,ndft,nnode,nout)
 c         write(nout,'(a)')  'end idGt'
-c       endif  
+c       endif
 c ......................................................................
 c
 c ..... Estruturas de comunicacao send/recv
 c
       write(nout,'(a)') 'nviz'
-      write(nout,'(128(i9,1x))')sizes(1) 
+      write(nout,'(128(i9,1x))')sizes(1)
       if(ovlp)write(nout,'(128(i9,1x))') sizes(2)
 c .......
       write(nout,'(a)') 'ranks'
       write(nout,'(129(i9,1x))') (ranks(i),i=1,sizes(1))
       if(ovlp) then
         write(nout,'(129(i9,1x))')(ranks(i),i=nprcs+1,nprcs+sizes(2))
-      endif  
+      endif
 c .......
       write(nout,'(a)') 'rcvs'
-      write(nout,'(128(i9,1x))')(rvcs(i),i=1,sizes(1)) 
+      write(nout,'(128(i9,1x))')(rvcs(i),i=1,sizes(1))
       if(ovlp)then
         write(nout,'(257(i9,1x))')
-     .       (rvcs(i),i=nprcs+1,nprcs+sizes(2)) 
-      endif  
+     .       (rvcs(i),i=nprcs+1,nprcs+sizes(2))
+      endif
 c .......
       write(nout,'(a)') 'dspl'
       write(nout,'(257(i9,1x))')(dspl(i),i=1,sizes(1))
       if(ovlp)then
         write(nout,'(257(i9,1x))')
-     .       (dspl(i),i=nprcs+1,nprcs+sizes(2)) 
+     .       (dspl(i),i=nprcs+1,nprcs+sizes(2))
       endif
 c antigo:
 c         write(nout,'(a)') 'nviz'
@@ -2177,8 +2190,8 @@ c ===
       open(nout,file=fileout)
 c ...
        write(nout,'(a)')  'parallel'
-       write(nout,'(a4,1x,i9)') 'noGL',nnode 
-       write(nout,'(a4,1x,i9)') 'nelG',numel               
+       write(nout,'(a4,1x,i9)') 'noGL',nnode
+       write(nout,'(a4,1x,i9)') 'nelG',numel
 c ......................................................................
 c
 c ..... Metodo de sub-divisao de dominio
@@ -2218,7 +2231,7 @@ c
 c ..... Mapa Local -> Global de elementos
 c
         my_numel = my_numel_ov + my_numel_nov
-        write(nout,'(a4,1x,i9)') 'elLG'        
+        write(nout,'(a4,1x,i9)') 'elLG'
         call Wrtvet_4(elLG,my_numel,nout)
 c ......................................................................
 c
@@ -2229,34 +2242,34 @@ c
 c ..... Estruturas de comunicacao send/recv
 c
       write(nout,'(a)') 'nviz'
-      write(nout,'(128(i9,1x))')sizes(1) 
+      write(nout,'(128(i9,1x))')sizes(1)
       if(ovlp)write(nout,'(128(i9,1x))') sizes(2)
 c .......
       write(nout,'(a)') 'ranks'
       write(nout,'(129(i9,1x))') (ranks(i),i=1,sizes(1))
       if(ovlp) then
         write(nout,'(129(i9,1x))')(ranks(i),i=nprcs+1,nprcs+sizes(2))
-      endif  
+      endif
 c .......
       write(nout,'(a)') 'rcvs'
-      write(nout,'(128(i9,1x))')(rcvs(i),i=1,sizes(1)) 
+      write(nout,'(128(i9,1x))')(rcvs(i),i=1,sizes(1))
       if(ovlp)then
         write(nout,'(257(i9,1x))')
-     .       (rcvs(i),i=nprcs+1,nprcs+sizes(2)) 
-      endif  
+     .       (rcvs(i),i=nprcs+1,nprcs+sizes(2))
+      endif
 c .......
       write(nout,'(a)') 'dspl'
       write(nout,'(257(i9,1x))')(dspl(i),i=1,sizes(1))
       if(ovlp)then
         write(nout,'(257(i9,1x))')
-     .       (dspl(i),i=nprcs+1,nprcs+sizes(2)) 
+     .       (dspl(i),i=nprcs+1,nprcs+sizes(2))
       endif
 c ......................................................................
       write(nout,'(a)')  'end parallel'
       write(nout,'(a)')  'stop'
 c =====================================================================
 c
-c === 
+c ===
       return
       end
 c =====================================================================
